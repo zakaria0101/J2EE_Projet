@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var OrderStatus = /*#__PURE__*/function (OrderStatus) {\n  OrderStatus[OrderStatus[\"New\"] = 0] = \"New\";\n  OrderStatus[OrderStatus[\"Finished\"] = 1] = \"Finished\";\n  OrderStatus[OrderStatus[\"Canceled\"] = 2] = \"Canceled\";\n  return OrderStatus;\n}(OrderStatus || {});","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

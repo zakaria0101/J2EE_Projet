@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var ProductStatus = /*#__PURE__*/function (ProductStatus) {\n  ProductStatus[ProductStatus[\"Available\"] = 0] = \"Available\";\n  ProductStatus[ProductStatus[\"Unavailable\"] = 1] = \"Unavailable\";\n  return ProductStatus;\n}(ProductStatus || {});","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

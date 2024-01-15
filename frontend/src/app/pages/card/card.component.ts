@@ -1,28 +1,24 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from "@angular/core";
 // import {prod, products} from '../shared/mockData';
-import {ProductService} from '../../services/product.service';
-import {ActivatedRoute} from '@angular/router';
-import {Subscription} from "rxjs";
+import { ProductService } from "../../services/product.service";
+import { ActivatedRoute } from "@angular/router";
+import { Subscription } from "rxjs";
 
 @Component({
-  selector: 'app-card',
-  templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css']
+  selector: "app-card",
+  templateUrl: "./card.component.html",
+  styleUrls: ["./card.component.css"],
 })
 export class CardComponent implements OnInit, OnDestroy {
-
-
   title: string;
   page: any;
   private paramSub: Subscription;
   private querySub: Subscription;
 
-
-  constructor(private productService: ProductService,
-              private route: ActivatedRoute) {
-
-  }
-
+  constructor(
+    private productService: ProductService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.querySub = this.route.queryParams.subscribe(() => {
@@ -31,7 +27,6 @@ export class CardComponent implements OnInit, OnDestroy {
     this.paramSub = this.route.params.subscribe(() => {
       this.update();
     });
-
   }
 
   ngOnDestroy(): void {
@@ -40,9 +35,9 @@ export class CardComponent implements OnInit, OnDestroy {
   }
 
   update() {
-    if (this.route.snapshot.queryParamMap.get('page')) {
-      const currentPage = +this.route.snapshot.queryParamMap.get('page');
-      const size = +this.route.snapshot.queryParamMap.get('size');
+    if (this.route.snapshot.queryParamMap.get("page")) {
+      const currentPage = +this.route.snapshot.queryParamMap.get("page");
+      const size = +this.route.snapshot.queryParamMap.get("size");
       this.getProds(currentPage, size);
     } else {
       this.getProds();
@@ -50,21 +45,19 @@ export class CardComponent implements OnInit, OnDestroy {
   }
   getProds(page: number = 1, size: number = 3) {
     if (this.route.snapshot.url.length == 1) {
-      this.productService.getAllInPage(+page, +size)
-        .subscribe(page => {
-          this.page = page;
-          this.title = 'Get Whatever You Want!';
-        });
-    } else { //  /category/:id
+      this.productService.getAllInPage(+page, +size).subscribe((page) => {
+        this.page = page;
+        this.title = "Get Whatever You Want!";
+      });
+    } else {
+      //  /category/:id
       const type = this.route.snapshot.url[1].path;
-      this.productService.getCategoryInPage(+type, page, size)
-        .subscribe(categoryPage => {
+      this.productService
+        .getCategoryInPage(+type, page, size)
+        .subscribe((categoryPage) => {
           this.title = categoryPage.category;
           this.page = categoryPage.page;
         });
     }
-
   }
-
-
 }
